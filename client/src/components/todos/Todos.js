@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import TodoList from './TodoList';
+import TodoForm from './TodoForm'
 const Todos = () => {
   const [todos, setTodos] = useState([])
 
@@ -35,7 +36,7 @@ const Todos = () => {
       .then( res => {
         // update in the state in the client 
         const updatedTodos = todos.map( t => {
-          if (t.id == id) {
+          if (t.id === id) {
             return res.data
           }
           return t
@@ -59,7 +60,12 @@ const Todos = () => {
 
   return (
     <>
-
+      <TodoForm addTodo={addTodo} />
+      <TodoList 
+        todos={todos} 
+        deleteTodo={deleteTodo}
+        updateTodo={updateTodo}
+      />
     </>
   )
 }
